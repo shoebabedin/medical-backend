@@ -4,7 +4,7 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
-const db = require("./config/mongodb");
+const mongodb = require("./config/mongodb");
 const route = require("./routes");
 
 
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
 app.use(route)
-db();
+mongodb();
 
 
 

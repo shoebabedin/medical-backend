@@ -10,8 +10,6 @@ const loginController = async (req, res) => {
     return res.send({ error: "Please enter your password" });
   } else {
     const isEmailExist = await User.find({ email: email });
-
-
     if (isEmailExist.length > 0) {
       bcrypt
         .compare(password, isEmailExist[0].password)

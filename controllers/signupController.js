@@ -8,11 +8,11 @@ const signupController = async (req, res) => {
   if (!role) {
     return res.status(403).json({ message: "please enter your Role" });
   } else if (!name) {
-    return res.status(403).json({ message: "please enter your name" });
+    return res.status(403).json({ message: "please enter your Name" });
   } else if (!email) {
-    return res.status(403).json({ message: "please enter your email" });
+    return res.status(403).json({ message: "please enter your Email" });
   } else if (!password) {
-    return res.status(403).json({ message: "please enter your password" });
+    return res.status(403).json({ message: "please enter your Password" });
   } else {
     const duplicate = await User.find({ email: email });
 
