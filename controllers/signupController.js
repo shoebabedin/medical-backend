@@ -17,7 +17,7 @@ const signupController = async (req, res) => {
     const duplicate = await User.find({ email: email });
 
     if (duplicate.length > 0) {
-      return res.status(403).json({ message: "Duplicate Name" });
+      return res.send({ error: "User Already Exist" });
     }
 
     bcrypt.hash(password, 10, async function (err, hash) {
