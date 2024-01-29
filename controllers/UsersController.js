@@ -21,15 +21,13 @@ const AllUserPendingController = async (req, res) => {
 };
 const ApproveController = async (req, res) => {
   const { id } = req.body;
-  console.log(id);
   try {
     const approveUsers = await User.findOneAndUpdate(
       { _id: id },
       { status: "accepted" },
       { new: true } // To return the modified document
     );
-
-    res.json(approveUsers);
+    res.send(approveUsers);
   } catch (error) {
     console.error("Error approving user:", error);
     res.status(500).send("Internal Server Error");
@@ -41,16 +39,18 @@ const RejectController = async (req, res) => {
   console.log(id);
   try {
     const rejectUsers = await User.findOneAndDelete({ _id: id });
-    res.json(rejectUsers);npm
+    res.json(rejectUsers);
   } catch (error) {
     console.error("Error fetching pending users:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
+
+
 module.exports = {
   AllUsersController,
   AllUserPendingController,
   ApproveController,
-  RejectController,
+  RejectController
 };

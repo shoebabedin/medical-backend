@@ -28,6 +28,30 @@ const userSchema = new Schema(
       type: String,
       require: [true, "password is required"],
     },
+    phone: {
+      type: String,
+      require: [true, "phone is required"],
+    },
+    h_name: {
+      type: String,
+      require: [true, "Hospital Name is required"],
+    },
+    position: {
+      type: String,
+      require: [true, "position is required"],
+    },
+    bmdcRegNo: {
+      type: String,
+      require: [true, "BMDC RegNo is required"],
+    },
+    profile_img: {
+      type: String,
+      require: [true, "Profile Image is required"],
+    },
+    doctor_sign: {
+      type: String,
+      require: [true, "Doctor Sign is required"],
+    },
     notification: {
       type: Array,
       default: [],
