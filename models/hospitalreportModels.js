@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 
-const degreeSchema = new Schema({
-  degree: String,
-  specialized: String,
-});
 const userSchema = new Schema(
   {
     role: {

@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const {AllUsersController, AllUserPendingController, ApproveController, RejectController} = require("./../../controllers/UsersController")
 const {AllDcotorsController, AllRequestedDcotorsController, AllRegisteredDcotorsController, NewDcotorsAddController, UpdateController} = require('./../../controllers/AllDcotorsController')
-const { AllHospitalsController, AllRequestedHospitalsController, AllRegisteredHospitalsController} = require('./../../controllers/AllHospitalsController')
+const { AllHospitalsController, AllRequestedHospitalsController, AllRegisteredHospitalsController, NewHospitalAddController, UpdateHospitalController} = require('./../../controllers/AllHospitalsController')
 
 // Set up storage for uploaded files
 const storage = multer.diskStorage({
@@ -29,7 +29,6 @@ router.get('/all-pending-users', AllUserPendingController)
 router.get('/all-doctors', AllDcotorsController)
 router.get('/all-requested-doctors', AllRequestedDcotorsController)
 router.get('/all-registered-doctors', AllRegisteredDcotorsController)
-
 router.get('/all-hospitals', AllHospitalsController)
 router.get('/all-requested-hospitals', AllRequestedHospitalsController)
 router.get('/all-registered-hospitals', AllRegisteredHospitalsController)
@@ -39,5 +38,7 @@ router.post('/approve-users', ApproveController)
 router.post('/reject-users', RejectController)
 router.post('/new-doctors-add',upload.fields([{ name: 'profile_img' }, { name: 'doctor_sign' }]), NewDcotorsAddController)
 router.post('/doctor-update',upload.fields([{ name: 'profile_img' }, { name: 'doctor_sign' }]), UpdateController)
+router.post('/new-hospital-add',upload.fields([{ name: 'hospital_img' }]), NewHospitalAddController)
+router.post('/hospital-update',upload.fields([{ name: 'hospital_img' }]), UpdateHospitalController)
 
 module.exports = router;
