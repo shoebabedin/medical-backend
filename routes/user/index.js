@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const {AllUsersController, AllUserPendingController, ApproveController, RejectController} = require("./../../controllers/UsersController")
 const {AllDcotorsController, AllRequestedDcotorsController, AllRegisteredDcotorsController, NewDcotorsAddController, UpdateController} = require('./../../controllers/AllDcotorsController')
-const { AllHospitalsController, AllRequestedHospitalsController, AllRegisteredHospitalsController, NewHospitalAddController, UpdateHospitalController} = require('./../../controllers/AllHospitalsController')
+const { AllHospitalsController, AllRequestedHospitalsController, AllRegisteredHospitalsController, NewHospitalAddController, UpdateHospitalController, addNewReportController, pendingReportController, allReportController, editReportController, RejectReportController, completeReportController} = require('./../../controllers/AllHospitalsController')
 
 // Set up storage for uploaded files
 const storage = multer.diskStorage({
@@ -32,6 +32,9 @@ router.get('/all-registered-doctors', AllRegisteredDcotorsController)
 router.get('/all-hospitals', AllHospitalsController)
 router.get('/all-requested-hospitals', AllRequestedHospitalsController)
 router.get('/all-registered-hospitals', AllRegisteredHospitalsController)
+router.get('/all-report', allReportController)
+router.get('/pending-report', pendingReportController)
+router.get('/complete-report', completeReportController)
 
 // post request
 router.post('/approve-users', ApproveController)
@@ -40,5 +43,8 @@ router.post('/new-doctors-add',upload.fields([{ name: 'profile_img' }, { name: '
 router.post('/doctor-update',upload.fields([{ name: 'profile_img' }, { name: 'doctor_sign' }]), UpdateController)
 router.post('/new-hospital-add',upload.fields([{ name: 'hospital_img' }]), NewHospitalAddController)
 router.post('/hospital-update',upload.fields([{ name: 'hospital_img' }]), UpdateHospitalController)
+router.post('/new-report-add',upload.fields([{ name: 'report_image' }]), addNewReportController)
+router.post('/edit-report',upload.fields([{ name: 'report_image' }]), editReportController)
+router.post('/reject-report', RejectReportController)
 
 module.exports = router;

@@ -1,75 +1,57 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-const userSchema = new Schema(
+const reportSchema = new Schema(
   {
-    role: {
-      type: String,
-      require: [true, "Role is required"],
-    },
     status: {
       type: String,
-      default: "pending",
+      default: "pending"
     },
-    name: {
+    date: {
       type: String,
-      require: [true, "Name is required"],
+      require: [true, "Name is required"]
     },
-    email: {
+    report_title: {
       type: String,
-      require: [true, "email is required"],
+      require: [true, "email is required"]
     },
-    password: {
+    patient_name: {
       type: String,
-      require: [true, "password is required"],
+      require: [true, "password is required"]
     },
-    phone: {
+    gender: {
       type: String,
-      require: [true, "phone is required"],
+      require: [true, "phone is required"]
     },
-    h_name: {
+    preferred_doctor: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',  // Reference to the User model
+      required: [true, "Preferred Doctor is required"]
+    },
+    department: {
       type: String,
-      require: [true, "Hospital Name is required"],
+      require: [true, "position is required"]
     },
-    position: {
+    report_type: {
       type: String,
-      require: [true, "position is required"],
+      require: [true, "BMDC RegNo is required"]
     },
-    bmdcRegNo: {
+    report_id: {
       type: String,
-      require: [true, "BMDC RegNo is required"],
+      require: [true, "address is required"]
     },
-    address: {
+    age: {
       type: String,
-      require: [true, "address is required"],
+      require: [true, "map_location is required"]
     },
-    map_location: {
+    report_image: {
       type: String,
-      require: [true, "map_location is required"],
-    },
-    profile_img: {
-      type: String,
-      require: [true, "Profile Image is required"],
-    },
-    doctor_sign: {
-      type: String,
-      require: [true, "Doctor Sign is required"],
-    },
-    notification: {
-      type: Array,
-      default: [],
-    },
-    seenNotification: {
-      type: Array,
-      default: [],
-    },
-    degrees: [degreeSchema],
+      require: [true, "Profile Image is required"]
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
-module.exports = mongoose.model("users", userSchema);
-
+module.exports = mongoose.model("report", reportSchema);
