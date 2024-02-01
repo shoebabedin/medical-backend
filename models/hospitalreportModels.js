@@ -47,6 +47,10 @@ const reportSchema = new Schema(
     report_image: {
       type: String,
       require: [true, "Profile Image is required"]
+    },
+    report_comment: {
+      type: String,
+      require: [true, "Profile Image is required"]
     }
   },
   {

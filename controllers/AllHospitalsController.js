@@ -193,10 +193,9 @@ const addNewReportController = async (req, res) => {
   }
 };
 
-
 const allReportController = async (req, res) => {
   try {
-    const allReports = await Report.find().populate('preferred_doctor');
+    const allReports = await Report.find().populate("preferred_doctor");
     res.json(allReports);
   } catch (error) {
     console.error(error);
@@ -206,7 +205,9 @@ const allReportController = async (req, res) => {
 
 const completeReportController = async (req, res) => {
   try {
-    const allCompleteReport = await Report.find({ status: "complete" }).populate('preferred_doctor');
+    const allCompleteReport = await Report.find({
+      status: "accepted"
+    }).populate("preferred_doctor");
     res.json(allCompleteReport);
   } catch (error) {
     console.error(error);
@@ -215,7 +216,9 @@ const completeReportController = async (req, res) => {
 };
 const pendingReportController = async (req, res) => {
   try {
-    const allPendingReport = await Report.find({ status: "pending" }).populate('preferred_doctor');
+    const allPendingReport = await Report.find({ status: "pending" }).populate(
+      "preferred_doctor"
+    );
     res.json(allPendingReport);
   } catch (error) {
     console.error(error);
@@ -225,6 +228,7 @@ const pendingReportController = async (req, res) => {
 
 const editReportController = async (req, res) => {
   const {
+    id,
     date,
     report_title,
     patient_name,
@@ -233,7 +237,8 @@ const editReportController = async (req, res) => {
     department,
     report_type,
     report_id,
-    age
+    age,
+    report_comment
   } = req.body;
 
   const reportImg = req.files.report_image
@@ -241,8 +246,8 @@ const editReportController = async (req, res) => {
       "." +
       req.files.report_image[0].originalname.split(".").pop()
     : null;
-
   if (
+    !id ||
     !date ||
     !report_title ||
     !patient_name ||
@@ -265,6 +270,7 @@ const editReportController = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    existingReport.status = "accepted";
     existingReport.date = date;
     existingReport.report_title = report_title;
     existingReport.patient_name = patient_name;
@@ -274,6 +280,7 @@ const editReportController = async (req, res) => {
     existingReport.report_type = report_type;
     existingReport.report_id = report_id;
     existingReport.age = age;
+    existingReport.report_comment = report_comment;
     if (reportImg) {
       existingReport.report_image = reportImg;
     }
@@ -290,9 +297,8 @@ const editReportController = async (req, res) => {
   }
 };
 
-
 const RejectReportController = async (req, res) => {
-  const {id} = req.body;
+  const { id } = req.body;
   try {
     const rejectReport = await Report.findOneAndDelete({ _id: id });
     res.json(rejectReport);
@@ -311,5 +317,7 @@ module.exports = {
   addNewReportController,
   pendingReportController,
   allReportController,
-  editReportController,RejectReportController,completeReportController
+  editReportController,
+  RejectReportController,
+  completeReportController
 };
